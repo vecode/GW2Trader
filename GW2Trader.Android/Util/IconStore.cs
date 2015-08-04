@@ -4,6 +4,7 @@ using System.IO;
 using System.Net;
 using Android.App;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Widget;
 using GW2Trader.Model;
 using Path = System.IO.Path;
@@ -28,12 +29,14 @@ namespace GW2Trader.Android.Util
             var path = GetIconPath(item);
             if (File.Exists(path))
             {
-                var icon = BitmapFactory.DecodeFile(path);
-
                 if (view != null & activity != null)
                 {
                     activity.RunOnUiThread(
-                        () => view.SetImageBitmap(BitmapFactory.DecodeFile(path)));
+                        () =>
+                        {
+                            //view.SetImageBitmap(BitmapFactory.DecodeFile(path)); 
+                            view.Background = Drawable.CreateFromPath(path);
+                        });
                 }
             }
             _iconsToLoad.Enqueue

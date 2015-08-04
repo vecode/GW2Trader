@@ -171,54 +171,6 @@
                     android:textColor="@drawable/ButtonTextColorSelector"
                     android:text="Settings" />
             </LinearLayout>
-        <!--<Button
-        style="@style/MyButtonStyle"
-        android:layout_marginTop="10dp"        
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Search" />
-    <Button
-        style="@style/MyButtonStyle"
-        android:layout_marginTop="10dp"
-        android:text="@string/Watchlists"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/WatchlistButton" />
-    <Button
-        style="@style/MyButtonStyle"
-        android:layout_marginTop="10dp"
-        android:text="@string/Investments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/InvestmentButton" />
-    <Button
-        style="@style/MyButtonStyle"
-        android:layout_marginTop="10dp"
-        android:text="Gem Price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/GemPriceButton" />
-    <Button
-        style="@style/MyButtonStyle"
-        android:layout_marginTop="10dp"
-        android:text="Calculator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/CalculatorButton" />
-    <Button
-        style="@style/MyButtonStyle"
-        android:layout_marginTop="10dp"
-        android:text="History"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/HistoryButton" />
-    <Button
-        style="@style/MyButtonStyle"
-        android:layout_marginTop="10dp"
-        android:text="@string/Settings"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/SettingsButton" />-->
             <Button
                 style="@style/MyButtonStyle"
                 android:layout_marginTop="5dp"

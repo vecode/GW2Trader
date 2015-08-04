@@ -4,14 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/WatchlistBackground"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    tools:actionBarNavMode="list">
+    android:gravity="center_vertical">
     <ImageView
         android:src="@drawable/SampleItemIcon"
+        android:layout_alignParentLeft="true"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_alignParentLeft="true"
         android:id="@+id/Icon" />
     <TextView
         android:text="Name"

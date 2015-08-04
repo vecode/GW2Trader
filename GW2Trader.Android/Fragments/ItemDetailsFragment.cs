@@ -1,11 +1,9 @@
 using System;
 using System.Threading;
-using Android.App;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
 using GW2Trader.Android.Util.UI;
-using GW2Trader.Manager;
 using GW2Trader.Model;
 using TinyIoC;
 using Fragment = Android.Support.V4.App.Fragment;
@@ -31,6 +29,11 @@ namespace GW2Trader.Android.Fragments
         private ImageView _iconImageView;
 
         private IIconStore _iconStore;
+
+        public ItemDetailsFragment()
+        {
+            RetainInstance = true;
+        }
                    
         public ItemDetailsFragment(Item item)
         {
@@ -40,6 +43,7 @@ namespace GW2Trader.Android.Fragments
         public override void OnCreate(Bundle savedInstanceState)
         {   
             _iconStore = TinyIoCContainer.Current.Resolve<IIconStore>();
+            RetainInstance = true;
             base.OnCreate(savedInstanceState);
         }
 
@@ -52,7 +56,11 @@ namespace GW2Trader.Android.Fragments
 
             SetItemDetails(_item);
 
-            ThreadPool.QueueUserWorkItem(x => { SetIcon(_item); });
+            ThreadPool.QueueUserWorkItem(x =>
+            {
+                SetIcon(_item);
+                RarityIndicatorSetter.SetRarityColor(Activity, _iconImageView, _item);
+            });
 
             //ThreadPool.QueueUserWorkItem(x =>
             //{

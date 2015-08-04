@@ -3,7 +3,7 @@
   <!-- NOTE: order is important (the first matching state(s) is what is rendered) -->
   <item
       android:state_pressed="true"
-      android:drawable="@color/HotPink" />
+      android:drawable="@color/White" />
   <item
-      android:drawable="@color/LightYellow" />
+      android:drawable="@color/Black" />
 </selector>

@@ -15,11 +15,19 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical">
-            <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_alignParentLeft="true"
-                android:id="@+id/Icon" />
+            <LinearLayout
+                android:id="@+id/IconLayout"
+                android:background="@color/Black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="1dp">
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_alignParentLeft="true"
+                    android:src="@drawable/RarityIndicator"
+                    android:id="@+id/Icon" />
+            </LinearLayout>
             <TextView
                 android:text="Text"
                 android:layout_width="fill_parent"

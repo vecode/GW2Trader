@@ -16,11 +16,17 @@ namespace GW2Trader.Android.Fragments
         private ListView _listingListView;
         private PriceListingAdapter _listingAdapter;
 
+        public PriceListingFragment()
+        {
+            RetainInstance = true;
+        }
+
         public PriceListingFragment(List<PriceListing> priceListings, string kind, string qtyName)
         {
             _priceListings = priceListings;
             _kind = kind;
             _qtyName = qtyName;
+            RetainInstance = true;
         }
 
         public List<PriceListing> PriceListings

@@ -107,6 +107,7 @@
     <Compile Include="Util\IconStore.cs" />
     <Compile Include="Util\IIconStore.cs" />
     <Compile Include="Util\UI\MoneyViewSetter.cs" />
+    <Compile Include="Util\UI\RarityIndicatorSetter.cs" />
     <Compile Include="Util\WebClientProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +248,9 @@
     <AndroidResource Include="Resources\drawable\WatchPressed.png" />
     <AndroidResource Include="Resources\drawable\InvestmentIconSelector.xml" />
     <AndroidResource Include="Resources\drawable\GemPriceIconSelector.xml" />
-    <AndroidResource Include="Resources\drawable\CalculatorIconSelector.xml" />
+    <AndroidResource Include="Resources\drawable\CalculatorIconSelector.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\HistoryIconSelector.xml" />
     <AndroidResource Include="Resources\drawable\SettingsIconSelector.xml" />
     <AndroidResource Include="Resources\drawable\HistoryPressed.png" />
@@ -258,6 +261,9 @@
     <AndroidResource Include="Resources\drawable\GemPressed.png" />
     <AndroidResource Include="Resources\drawable\ArrowLeftSelector.xml" />
     <AndroidResource Include="Resources\drawable\ArrowRightSelector.xml" />
+    <AndroidResource Include="Resources\drawable\RarityIndicator.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">

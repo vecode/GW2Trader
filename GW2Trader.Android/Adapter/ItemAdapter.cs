@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using System.Threading;
 using Android.App;
+using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
 using GW2Trader.Android.Util;
+using GW2Trader.Android.Util.UI;
 using GW2Trader.Model;
 using TinyIoC;
 
@@ -37,9 +40,13 @@ namespace GW2Trader.Android.Adapter
             var view = convertView ?? _activity.LayoutInflater.Inflate(Resource.Layout.SearchResultListViewItem, null);
             view.FindViewById<TextView>(Resource.Id.Name).Text = item.Name;
 
-            var iconView = view.FindViewById<ImageView>(Resource.Id.Icon);
+            var iconView = view.FindViewById<ImageView>(Resource.Id.Icon);            
 
-            ThreadPool.QueueUserWorkItem(x => _iconStore.SetIcon(item, iconView, _activity));
+            ThreadPool.QueueUserWorkItem(x =>
+            {
+                _iconStore.SetIcon(item, iconView, _activity);
+                RarityIndicatorSetter.SetRarityColor(_activity, iconView, item);
+            });
 
             return view;
         }
@@ -47,6 +54,6 @@ namespace GW2Trader.Android.Adapter
         public List<Item> GetItems()
         {
             return _items;
-        }
+        }        
     }
 }
