@@ -16,9 +16,9 @@
 
 package com.github.vecode.gw2trader.presentation.apikeyedit;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +30,7 @@ import com.github.vecode.gw2trader.R;
 import com.github.vecode.gw2trader.domain.model.APIKey;
 import com.github.vecode.gw2trader.presentation.apikeyoverview.APIKeyOverviewActivity;
 
-public class APIKeyCreationActivity extends Activity implements IAPIKeyCreationView {
+public class APIKeyCreationActivity extends AppCompatActivity implements IAPIKeyCreationView {
 
     private EditText nameInput;
     private EditText keyInput;
@@ -46,6 +46,13 @@ public class APIKeyCreationActivity extends Activity implements IAPIKeyCreationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apikey_creation);
+
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+//        if (toolbar != null){
+////            setSupportActionBar(toolbar);
+//            getSupportActionBar().setDisplayShowTitleEnabled(false);
+//            ((TextView) toolbar.findViewById(R.id.Title)).setText("API Keys");
+//        }
 
         if(presenter == null){
             // TODO use dependency injection

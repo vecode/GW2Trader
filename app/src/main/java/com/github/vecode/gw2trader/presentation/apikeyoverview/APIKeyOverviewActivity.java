@@ -16,44 +16,54 @@
 
 package com.github.vecode.gw2trader.presentation.apikeyoverview;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.github.vecode.gw2trader.R;
 import com.github.vecode.gw2trader.presentation.apikeyedit.APIKeyCreationActivity;
 
-public class APIKeyOverviewActivity extends Activity implements IAPIKeyOverviewView{
+public class APIKeyOverviewActivity extends AppCompatActivity implements IAPIKeyOverviewView{
 
-    private IAPIKeyOverviewPresenter presenter;
+    private IAPIKeyOverviewPresenter mPresenter;
 
-    private LinearLayout errorMsg;
-    private Button addKey;
+    private LinearLayout mErrorMsg;
+    private Button mAddKey;
+    private Menu mMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_apikey_overview);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.Toolbar);
+        if (toolbar != null){
+            setSupportActionBar(toolbar);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+            ((TextView) toolbar.findViewById(R.id.Title)).setText("API Keys");
+        }
+
         // TODO use dependency injection
         // TODO pass actual adapter
         ListView keys = (ListView) findViewById(R.id.KeyList);
         APIKeyAdapter adapter = new APIKeyAdapter(this, this);
         keys.setAdapter(adapter);
-        presenter = adapter;
+        mPresenter = adapter;
 
-        errorMsg = (LinearLayout) findViewById(R.id.NoKeyFoundErrorMsg);
-        addKey = (Button) findViewById(R.id.AddKey);
-        addKey.setOnClickListener(new View.OnClickListener() {
+        mErrorMsg = (LinearLayout) findViewById(R.id.NoKeyFoundErrorMsg);
+        mAddKey = (Button) findViewById(R.id.AddKey);
+        mAddKey.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onCreateAPIKey();
+                mPresenter.onCreateAPIKey();
             }
         });
     }
@@ -61,13 +71,14 @@ public class APIKeyOverviewActivity extends Activity implements IAPIKeyOverviewV
     @Override
     protected void onStart(){
         super.onStart();
-        presenter.requestKeys();
+        mPresenter.requestKeys();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        mMenu = menu;
         getMenuInflater().inflate(R.menu.menu_apikey_overview, menu);
+
         return true;
     }
 
@@ -79,8 +90,8 @@ public class APIKeyOverviewActivity extends Activity implements IAPIKeyOverviewV
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_addKey) {
+            mPresenter.onCreateAPIKey();
         }
 
         return super.onOptionsItemSelected(item);
@@ -88,12 +99,12 @@ public class APIKeyOverviewActivity extends Activity implements IAPIKeyOverviewV
 
     @Override
     public void showNoKeysFoundMsg() {
-        errorMsg.setVisibility(View.VISIBLE);
+        mErrorMsg.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideNoKeysFoundMsg() {
-        errorMsg.setVisibility(View.GONE);
+        mErrorMsg.setVisibility(View.GONE);
     }
 
     @Override
