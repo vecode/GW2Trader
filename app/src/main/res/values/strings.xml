@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">GW2Trader</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_apikey_overview">APIKeyOverviewActivity</string>
+    <string name="title_activity_apikey_creation">APIKeyCreationActivity</string>
+
+    <string name="error_keyname_exists">Name already exists!</string>
+    <string name="error_keyname_empty">Name cannot be empty!</string>
+    <string name="error_key_exists">Key already exists!</string>
+    <string name="error_key_empty">Key cannot be empty!</string>
+    <string name="error_key_invalid">Key is invalid!</string>
+    <string name="error_network_error">Network error!</string>
+
+</resources>

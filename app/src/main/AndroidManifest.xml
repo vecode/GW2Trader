@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.github.vecode.gw2trader" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".presentation.apikeyoverview.APIKeyOverviewActivity"
+            android:label="@string/title_activity_apikey_overview" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".presentation.apikeyedit.APIKeyCreationActivity"
+            android:label="@string/title_activity_apikey_creation"
+            android:parentActivityName=".presentation.apikeyoverview.APIKeyOverviewActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".presentation.apikeyoverview.APIKeyOverviewActivity" />
+        </activity>
+    </application>
+
+</manifest>
