@@ -13,5 +13,6 @@
     <string name="error_key_invalid">Key is invalid!</string>
     <string name="error_network_error">Network error!</string>
     <string name="action_addKey">Add API Key</string>
+    <string name="title_activity_material_storage">MaterialStorageActivity</string>
 
 </resources>

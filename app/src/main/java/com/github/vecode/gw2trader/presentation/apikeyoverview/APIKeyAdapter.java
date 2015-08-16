@@ -50,11 +50,7 @@ public class APIKeyAdapter extends BaseAdapter implements IAPIKeyOverviewPresent
 
     @Override
     public int getCount() {
-        if (mKeys != null) {
-            return mKeys.size();
-        }else{
-            return 0;
-        }
+        return mKeys == null ? 0 : mKeys.size();
     }
 
     @Override
@@ -87,12 +83,19 @@ public class APIKeyAdapter extends BaseAdapter implements IAPIKeyOverviewPresent
             ((CheckBox) v.findViewById(R.id.CharacterPermission)).setChecked(key.getCharacterAccess());
 
             final RelativeLayout details = (RelativeLayout) v.findViewById(R.id.Details);
+
             (v.findViewById(R.id.Toggle)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (details.getVisibility() == View.GONE){
+                    if(details.getVisibility()==View.GONE)
+
+                    {
                         details.setVisibility(View.VISIBLE);
-                    }else{
+                    }
+
+                    else
+
+                    {
                         details.setVisibility(View.GONE);
                     }
                 }
