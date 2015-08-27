@@ -17,7 +17,6 @@
 package com.github.vecode.gw2trader.presentation.apikeyedit;
 
 import com.github.vecode.gw2trader.domain.model.APIKey;
-import com.github.vecode.gw2trader.presentation.apikeyedit.IAPIKeyCreationInteractor;
 
 public class APIKeyCreationInteractor implements IAPIKeyCreationInteractor {
 
@@ -60,10 +59,17 @@ public class APIKeyCreationInteractor implements IAPIKeyCreationInteractor {
     }
 
     @Override
-    public void loadKey(int id, IOnAPIKeyLoadedListener listener) {
+    public void loadKey(int id, final IOnAPIKeyLoadedListener listener) {
         // TODO retrieve actual key
+
         APIKey key = new APIKey("my key", "1111-2222-3333");
         key.setId(1);
         listener.onKeyLoaded(key);
+    }
+
+    private APIKey getKey(){
+        APIKey key = new APIKey("my key", "1111-2222-3333");
+        key.setId(1);
+        return key;
     }
 }
