@@ -10,7 +10,7 @@ namespace GW2Trader.Desktop.Data
         public GameDataContext()
             //: base("ItemDb.DbConnection")
         {
-            Database.SetInitializer(new DbInitializer());
+            Database.SetInitializer(new DbInitializer());            
         }
 
         public IDbSet<GameItemModel> GameItems { get; set; }

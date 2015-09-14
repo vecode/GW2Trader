@@ -81,9 +81,9 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <RadioButton GroupName="InvestmentStatus" Content="All" IsChecked="True" Margin="4"/>
-                        <RadioButton GroupName="InvestmentStatus" Content="Current" IsChecked="False" Margin="4"/>
-                        <RadioButton GroupName="InvestmentStatus" Content="Past" IsChecked="False" Margin="4"/>
+                        <RadioButton GroupName="InvestmentStatus" Content="All" IsChecked="{Binding FilterAll}" Margin="4"/>
+                        <RadioButton GroupName="InvestmentStatus" Content="Unsold" IsChecked="{Binding FilterUnsold}" Margin="4"/>
+                        <RadioButton GroupName="InvestmentStatus" Content="Sold" IsChecked="{Binding FilterSold}" Margin="4"/>
                     </StackPanel>
 
                     <control:MultiSelectListBox Grid.Row="1" Margin="0,1,0,1" ItemsSource="{Binding Watchlists}"
@@ -115,7 +115,7 @@
         </Grid>
 
         <control:CustomDataGrid Grid.Column="1" Margin="2" 
-            ItemsSource="{Binding SelectedWatchlist.Items}"
+            ItemsSource="{Binding VisibleItems}"
             AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
             HorizontalContentAlignment="Center" VerticalContentAlignment="Center"                                
             CellStyle="{StaticResource ItemDataGridCellStyle}"

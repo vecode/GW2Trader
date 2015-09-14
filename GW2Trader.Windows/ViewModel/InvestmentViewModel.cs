@@ -17,27 +17,24 @@ namespace GW2Trader.Desktop.ViewModel
         private string _investmentListName;
         private string _investmentListDescription;
         private InvestmentWatchlistModel _selectedWatchlist;
-        private List<InvestmentWatchlistModel> _selectedWatchlists;        
+        private List<InvestmentWatchlistModel> _selectedWatchlists;
         private ObservableCollection<InvestmentWatchlistModel> _watchlists;
+        private bool _filterAll = true;
+        private bool _filterSold;
+        private bool _filterUnsold;
 
         #endregion
 
         private readonly IGameDataContextProvider _contextProvider;
-        private readonly List<GameItemModel> _items;
         private readonly Dictionary<int, GameItemModel> _itemDictionary;
 
-        public enum SelectionMode
-        {
-            All,
-            Current,
-            Past
-        };
+
 
         public InvestmentViewModel(IGameDataContextProvider contextProvider, List<GameItemModel> items, Dictionary<int, GameItemModel> itemDictionary)
         {
             ViewModelName = "Investments";
             _contextProvider = contextProvider;
-            _items = items;
+            SharedItems = items;
             _itemDictionary = itemDictionary;
 
             BuildWatchlists();
@@ -92,11 +89,10 @@ namespace GW2Trader.Desktop.ViewModel
             {
                 _selectedWatchlist = value;
                 RaisePropertyChanged("SelectedWatchlist");
+                RaisePropertyChanged("VisibleItems");
                 NotifyInvestmentStatisticsChanged();
-                InvestmentListName = _selectedWatchlist != null ?
-                                     _selectedWatchlist.Name : null;
-                InvestmentListDescription = _selectedWatchlist != null ?
-                    _selectedWatchlist.Description : null;
+                InvestmentListName = _selectedWatchlist?.Name;
+                InvestmentListDescription = _selectedWatchlist?.Description;
             }
         }
 
@@ -124,9 +120,9 @@ namespace GW2Trader.Desktop.ViewModel
         {
             get
             {
-                if (SelectedWatchlist != null)
+                if (VisibleItems != null)
                 {
-                    return SelectedWatchlist.Items.Sum(inv => inv.Count * inv.PurchasePrice);
+                    return VisibleItems.Sum(inv => inv.Count * inv.PurchasePrice);
                 }
                 return 0;
             }
@@ -136,9 +132,9 @@ namespace GW2Trader.Desktop.ViewModel
         {
             get
             {
-                if (SelectedWatchlist != null)
+                if (VisibleItems != null)
                 {
-                    return SelectedWatchlist.Items.Sum(inv => inv.CurrentTotalProfit);
+                    return VisibleItems.Sum(inv => inv.CurrentTotalProfit);
                 }
                 return 0;
             }
@@ -148,18 +144,60 @@ namespace GW2Trader.Desktop.ViewModel
         {
             get
             {
-                if (SelectedWatchlist != null)
+                if (VisibleItems != null)
                 {
-                    return (int)Math.Round(SelectedWatchlist.Items.Sum(inv => inv.GameItem.SellPrice * 0.85f * inv.Count));
+                    return (int)Math.Round(VisibleItems.Sum(inv => inv.GameItem.SellPrice * 0.85f * inv.Count));
                 }
                 return 0;
             }
         }
 
-        public List<GameItemModel> SharedItems
+        public bool FilterAll
         {
-            get { return _items; }
+            get { return _filterAll; }
+            set
+            {
+                if (_filterAll != value)
+                {
+                    _filterAll = value;
+                    RaisePropertyChanged("FilterAll");
+                    RaisePropertyChanged("VisibleItems");
+                    NotifyInvestmentStatisticsChanged();
+                }
+            }
         }
+
+        public bool FilterSold
+        {
+            get { return _filterSold; }
+            set
+            {
+                if (_filterUnsold != value)
+                {
+                    _filterSold = value;
+                    RaisePropertyChanged("FilterSold");
+                    RaisePropertyChanged("VisibleItems");
+                    NotifyInvestmentStatisticsChanged();
+                }
+            }
+        }
+
+        public bool FilterUnsold
+        {
+            get { return _filterUnsold; }
+            set
+            {
+                if (_filterUnsold != value)
+                {
+                    _filterUnsold = value;
+                    RaisePropertyChanged("FilterUnsold");
+                    RaisePropertyChanged("VisibleItems");
+                    NotifyInvestmentStatisticsChanged();
+                }
+            }
+        }
+
+        public List<GameItemModel> SharedItems { get; }
 
         public void AddInvestmentList()
         {
@@ -300,13 +338,26 @@ namespace GW2Trader.Desktop.ViewModel
 
         #endregion
 
-        public IList<GameItemModel> ShownItems
+        public IList<InvestmentModel> VisibleItems
         {
             get
             {
-                if (SelectedWatchlist != null) return SelectedWatchlist.Items.Select(inv => inv.GameItem).ToList();
-                return null;
+                if (FilterSold)
+                {
+                    return SelectedWatchlist?.Items.Where(i => i.IsSold).ToList();
+                }
+
+                if (FilterUnsold)
+                {
+                    return SelectedWatchlist?.Items.Where(i => !i.IsSold).ToList();
+                }
+                return SelectedWatchlist?.Items.ToList();
             }
+        }
+
+        public IList<GameItemModel> ShownItems
+        {
+            get { return VisibleItems.Select(i => i.GameItem).ToList(); }
         }
     }
 }
