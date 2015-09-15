@@ -28,8 +28,6 @@ namespace GW2Trader.Desktop.ViewModel
         private readonly IGameDataContextProvider _contextProvider;
         private readonly Dictionary<int, GameItemModel> _itemDictionary;
 
-
-
         public InvestmentViewModel(IGameDataContextProvider contextProvider, List<GameItemModel> items, Dictionary<int, GameItemModel> itemDictionary)
         {
             ViewModelName = "Investments";
@@ -172,7 +170,7 @@ namespace GW2Trader.Desktop.ViewModel
             get { return _filterSold; }
             set
             {
-                if (_filterUnsold != value)
+                if (_filterSold != value)
                 {
                     _filterSold = value;
                     RaisePropertyChanged("FilterSold");
